@@ -1,0 +1,153 @@
+[gd_scene load_steps=24 format=3 uid="uid://ud5m07ikm810"]
+
+[ext_resource type="Script" path="res://Player.gd" id="2_s8pv5"]
+[ext_resource type="ArrayMesh" uid="uid://beg7mffhkqxqn" path="res://assets/kenney_assets/knife_mesh.obj" id="3_43gtl"]
+[ext_resource type="Script" path="res://Weapon.gd" id="3_eqs8c"]
+[ext_resource type="ArrayMesh" uid="uid://b3hfttqcg76gf" path="res://assets/kenney_assets/uzi_mesh.obj" id="3_sgfnw"]
+[ext_resource type="Script" path="res://weaponKnife.gd" id="4_xurdj"]
+[ext_resource type="ArrayMesh" uid="uid://bk05mgprlpje3" path="res://assets/kenney_assets/m4a1_mesh.obj" id="5_h0nqm"]
+[ext_resource type="Script" path="res://weaponSmg.gd" id="6_iv4la"]
+[ext_resource type="ArrayMesh" uid="uid://b6c0amnop5cbc" path="res://assets/kenney_assets/shotgun_mesh.obj" id="6_ukg6k"]
+[ext_resource type="ArrayMesh" uid="uid://b4if1cxmihww0" path="res://assets/kenney_assets/rocket_launcher_mesh.obj" id="7_cti4u"]
+[ext_resource type="Script" path="res://weaponRifle.gd" id="8_ole0d"]
+[ext_resource type="Script" path="res://weaponShotgun.gd" id="10_k3hpt"]
+[ext_resource type="Script" path="res://weaponRPG.gd" id="12_r57ss"]
+[ext_resource type="Script" path="res://barAmmo.gd" id="13_xcyw4"]
+[ext_resource type="Script" path="res://barHealth.gd" id="14_wwk61"]
+[ext_resource type="Script" path="res://barSpeed.gd" id="15_1tgbi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rjmxs"]
+sky_top_color = Color(0.948269, 0.752328, 0.764367, 1)
+sky_horizon_color = Color(0.90278, 0, 0.119811, 1)
+sky_curve = 0.252268
+ground_bottom_color = Color(0.068762, 0.0535688, 0.0359923, 1)
+ground_horizon_color = Color(0.865636, 0, 0.165187, 1)
+ground_curve = 0.0672719
+
+[sub_resource type="Sky" id="Sky_kiljo"]
+sky_material = SubResource("ProceduralSkyMaterial_rjmxs")
+
+[sub_resource type="Environment" id="Environment_6t3nn"]
+background_mode = 2
+background_color = Color(0.290196, 0.52549, 1, 1)
+sky = SubResource("Sky_kiljo")
+ambient_light_source = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4scq6"]
+
+[sub_resource type="Curve3D" id="Curve3D_eofcg"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.38895, 0, -0.216892, 0, 0, 0, 0, 0, 0, 2.40296, 0, -3.57048, 0, 0, 0, 0, 0, 0, 2.58543, 0, -10.6829, 0, 0, 0, 0, 0, 0, 10.0824, -0.311369, -10.8139, 0, 0, 0, 0, 0, 0, 10.0087, 0, -16.4687, 0, 0, 0, 0, 0, 0, 9.89954, 0, -21.272, 0, 0, 0, 0, 0, 0, 6.5154, 0, -26.7849, 0, 0, 0, 0, 0, 0, -1.01704, 0, -28.477, 0, 0, 0, 0, 0, 0, -7.78532, 0, -28.0949, 0, 0, 0, 0, 0, 0, -13.5711, 0, -25.1474, 0, 0, 0, 0, 0, 0, -17.119, 0, -17.615, 0, 0, 0, 0, 0, 0, -15.809, 0, -11.9929, 0, 0, 0, 0, 0, 0, -12.0974, 0, -8.93628, 0, 0, 0, 0, 0, 0, -7.89449, 0, -9.91877, 0, 0, 0, 0, 0, 0, -5.21993, 0, -13.4667, 0, 0, 0, 0, 0, 0, -1.68659, 0, -18.6561),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 16
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oghpy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bech3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ojlwn"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource("Environment_6t3nn")
+
+[node name="SunLight" type="DirectionalLight3D" parent="Level/WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -0.867436, 0.497549, 0, -0.497549, -0.867436, 0, 0, 0)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Level/WorldEnvironment"]
+transform = Transform3D(9.72085, 0, 0, 0, 9.72085, 0, 0, 0, 9.72085, 0, 0, 0)
+operation = 1
+use_collision = true
+flip_faces = true
+polygon = PackedVector2Array(-0.469486, 0.00650787, -0.552418, 1.76065, 1.74519, 1.79068, 1.54014, -0.00727143)
+mode = 2
+path_node = NodePath("../../Path3D")
+path_interval_type = 0
+path_interval = 0.36
+path_simplify_angle = 9.5
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_4scq6")
+
+[node name="Path3D" type="Path3D" parent="Level"]
+curve = SubResource("Curve3D_eofcg")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8141, 1.40722, -6.69205)
+script = ExtResource("2_s8pv5")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="weaponBase" type="Node3D" parent="Player/Camera3D"]
+transform = Transform3D(-8.92167, 0, -1.18486, 0, 9, 0, 1.18486, 0, -8.92167, 0.34827, -0.394465, -0.964056)
+script = ExtResource("3_eqs8c")
+
+[node name="weaponMelee" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.875519, 0.209857, 0.435234, 0.0728029, 0.833182, -0.548186, -0.477669, 0.511633, 0.714188, -0.0050832, 0.0123221, -0.0357567)
+visible = false
+mesh = ExtResource("3_43gtl")
+skeleton = NodePath("../..")
+script = ExtResource("4_xurdj")
+
+[node name="weaponSmg" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+mesh = ExtResource("3_sgfnw")
+skeleton = NodePath("../..")
+script = ExtResource("6_iv4la")
+
+[node name="weaponRifle" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.966706, 0, 0.171207, 0, 1, 0, -0.156936, 0, 1.05461, -0.00135601, 0.00522333, -0.0224425)
+visible = false
+mesh = ExtResource("5_h0nqm")
+skeleton = NodePath("../..")
+script = ExtResource("8_ole0d")
+
+[node name="weaponShotgun" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(1.58466, 0, 0.0445408, 0, 1.33111, 0, -0.0566105, 0, 1.2468, -0.0129892, -0.000217974, -0.0219936)
+visible = false
+mesh = ExtResource("6_ukg6k")
+skeleton = NodePath("../..")
+script = ExtResource("10_k3hpt")
+
+[node name="weaponRPG" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.991667, 0, 0.12883, 0, 1, 0, -0.12883, 0, 0.991667, -0.00764668, 0.0177257, -0.0572511)
+visible = false
+mesh = ExtResource("7_cti4u")
+skeleton = NodePath("../..")
+script = ExtResource("12_r57ss")
+
+[node name="barAmmo" type="ProgressBar" parent="Player/Camera3D/weaponBase"]
+material = SubResource("CanvasItemMaterial_oghpy")
+offset_left = 867.0
+offset_top = 603.0
+offset_right = 1118.0
+offset_bottom = 632.0
+script = ExtResource("13_xcyw4")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_bech3")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Player/BodyCollision"]
+mesh = SubResource("CapsuleMesh_ojlwn")
+skeleton = NodePath("../..")
+
+[node name="barHealth" type="ProgressBar" parent="Player"]
+offset_left = 29.0
+offset_top = 603.0
+offset_right = 279.0
+offset_bottom = 630.0
+script = ExtResource("14_wwk61")
+
+[node name="barSpeed" type="ProgressBar" parent="Player"]
+offset_left = 437.0
+offset_top = 590.0
+offset_right = 698.0
+offset_bottom = 640.0
+script = ExtResource("15_1tgbi")

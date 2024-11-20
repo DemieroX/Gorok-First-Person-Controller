@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bf2sw3qghk4pe"
+path.s3tc="res://.godot/imported/dm_morph-8fe69e597417afb3fa00eaf81f8d9860_dm-morph_material_15.png-5050c79a4ec5bc7136fa97c7758d91e6.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "f30d5696fcb8f1496e0d11b576ca1d95"
+}
+
+[deps]
+
+source_file="res://assets/dm_morph/dm_morph-8fe69e597417afb3fa00eaf81f8d9860_dm-morph_material_15.png"
+dest_files=["res://.godot/imported/dm_morph-8fe69e597417afb3fa00eaf81f8d9860_dm-morph_material_15.png-5050c79a4ec5bc7136fa97c7758d91e6.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

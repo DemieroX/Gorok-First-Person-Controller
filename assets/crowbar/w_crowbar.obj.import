@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bl1cxnk15k2o6"
+path="res://.godot/imported/w_crowbar.obj-026bb394e08eee619cb3bbe05f617af6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/w_crowbar.obj-026bb394e08eee619cb3bbe05f617af6.mesh"]
+
+source_file="res://assets/crowbar/w_crowbar.obj"
+dest_files=["res://.godot/imported/w_crowbar.obj-026bb394e08eee619cb3bbe05f617af6.mesh", "res://.godot/imported/w_crowbar.obj-026bb394e08eee619cb3bbe05f617af6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

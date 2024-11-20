@@ -1,0 +1,26 @@
+# Blender MTL File: 'w_crowbar.blend'
+# Material Count: 2
+
+newmtl crowbar_cyl
+Ns 81.000006
+Ka 1.000000 1.000000 1.000000
+Kd 0.463411 0.829384 0.474197
+Ks 0.100000 0.100000 0.100000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump crowbar_normal.png
+map_Kd crowbar_cyl.png
+
+newmtl head_uvw
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.200000 0.200000 0.200000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump head_normal.png
+map_Kd head.png

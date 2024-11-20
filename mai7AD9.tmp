@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://ud5m07ikm810"]
+
+[ext_resource type="Script" path="res://Player.gd" id="2_s8pv5"]
+[ext_resource type="ArrayMesh" uid="uid://beg7mffhkqxqn" path="res://assets/kenney_assets/knife_mesh.obj" id="3_43gtl"]
+[ext_resource type="Script" path="res://Weapon.gd" id="3_eqs8c"]
+[ext_resource type="ArrayMesh" uid="uid://b3hfttqcg76gf" path="res://assets/kenney_assets/uzi_mesh.obj" id="3_sgfnw"]
+[ext_resource type="ArrayMesh" uid="uid://bk05mgprlpje3" path="res://assets/kenney_assets/m4a1_mesh.obj" id="5_h0nqm"]
+[ext_resource type="ArrayMesh" uid="uid://dopau1gmqfic7" path="res://assets/kenney_assets/sniper_mesh.obj" id="6_7dul6"]
+[ext_resource type="ArrayMesh" uid="uid://b4if1cxmihww0" path="res://assets/kenney_assets/rocket_launcher_mesh.obj" id="7_cti4u"]
+
+[sub_resource type="Environment" id="Environment_6t3nn"]
+background_mode = 1
+background_color = Color(0.290196, 0.52549, 1, 1)
+background_energy_multiplier = 0.52
+
+[sub_resource type="Curve3D" id="Curve3D_kthd6"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -40.0929, 0, 18.1459, 0, 0, 0, 0, 0, 0, -51.4996, 0, -3.3056, 0, 0, 0, 0, 0, 0, -49.4566, 0, -33.4398, 0, 0, 0, 0, 0, 0, -36.5176, 0, -51.9971, 0, 0, 0, 0, 0, 0, -3.48912, 0, -63.2336, 0, 0, 0, 0, 0, 0, 15.4086, 0, -55.0616, 0, 0, 0, 0, 0, 0, 21.7079, 0, -39.2283, 0, 0, 0, 0, 0, 0, 15.7491, 0, -24.4166, 0, 0, 0, 0, 0, 0, 11.3226, 0, -14.0313, 0, 0, 0, 0, 0, 0, 26.3046, 0, -7.56185, 0, 0, 0, 0, 0, 0, 37.8816, 0, -10.6263, 0, 0, 0, 0, 0, 0, 43.6701, 0, -25.0976, 0, 0, 0, 0, 0, 0, 44.3511, 0, -40.5903, 0, 0, 0, 0, 0, 0, 63.9299, 0, -49.2731, 0, 0, 0, 0, 0, 0, 80.4441, 0, -45.5276, 0, 0, 0, 0, 0, 0, 96.7881, 0, -28.1621, 0, 0, 0, 0, 0, 0, 99.1716, 0, -9.4346, 5.11698, 0.946285, -5.28892, -5.11698, -0.946285, 5.28892, 94.2741, 0.29628, 9.22917, 8.2725, -2.49069, -3.29111, -8.2725, 2.49069, 3.29111, 76.5993, 0.514667, 21.2915, 0, 0, 0, 0, 0, 0, 52.0124, 0, 22.5724, 0, 0, 0, 0, 0, 0, 29.1989, 0, 15.5922, 0, 0, 0, 0, 0, 0, 6.72587, 0, 15.4219, 0, 0, 0, 0, 0, 0, -20.3439, 0, 25.2964),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.66157, 0, 0, 0, 0, 0)
+}
+point_count = 23
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bech3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ojlwn"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource("Environment_6t3nn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(-0.727647, 0.0482605, -0.684253, -0.685914, -0.0407042, 0.726543, 0.00721138, 0.998005, 0.0627209, -7.0862, 22.9846, -6.80986)
+
+[node name="PathDraw" type="Path3D" parent="Level"]
+transform = Transform3D(0.370233, 0, 0, 0, 1, 0, 0, 0, 0.314288, 0.13707, 7.62939e-06, -0.110021)
+curve = SubResource("Curve3D_kthd6")
+
+[node name="PathGeo" type="CSGPolygon3D" parent="Level"]
+transform = Transform3D(1.45913, 0, 0, 0, 1, 0, 0, 0, 1.76601, 10, 0, 10)
+use_collision = true
+polygon = PackedVector2Array(-5.28432, 0.136318, -6.09139, 1.81294, 7.94947, 1.46903, 6.60408, -0.386078)
+mode = 2
+path_node = NodePath("../PathDraw")
+path_interval_type = 0
+path_interval = 5.45
+path_simplify_angle = 16.0
+path_rotation = 1
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.699, 3.2624, 19.7347)
+script = ExtResource("2_s8pv5")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="weaponBase" type="Node3D" parent="Player/Camera3D"]
+transform = Transform3D(-8.92167, 0, -1.18486, 0, 9, 0, 1.18486, 0, -8.92167, 0.34827, -0.394465, -0.964056)
+script = ExtResource("3_eqs8c")
+
+[node name="weaponMelee" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.875519, 0.209857, 0.435234, 0.0728029, 0.833182, -0.548186, -0.477669, 0.511633, 0.714188, -0.00671697, 0, -0.0234526)
+visible = false
+mesh = ExtResource("3_43gtl")
+skeleton = NodePath("../..")
+
+[node name="weaponSmg" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+visible = false
+mesh = ExtResource("3_sgfnw")
+skeleton = NodePath("../..")
+
+[node name="weaponRifle" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.966706, 0, 0.171207, 0, 1, 0, -0.156936, 0, 1.05461, -0.00135601, 0.00522333, -0.0224425)
+mesh = ExtResource("5_h0nqm")
+skeleton = NodePath("../..")
+
+[node name="weaponSniper" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.984041, 0, -0.177944, 0, 1, 0, 0.177944, 0, 0.984041, 0.00838399, 0.00522333, -0.021149)
+visible = false
+mesh = ExtResource("6_7dul6")
+skeleton = NodePath("../..")
+
+[node name="weaponRPG" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.991667, 0, 0.12883, 0, 1, 0, -0.12883, 0, 0.991667, -0.00764668, 0.0177257, -0.0572511)
+visible = false
+mesh = ExtResource("7_cti4u")
+skeleton = NodePath("../..")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_bech3")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Player/BodyCollision"]
+visible = false
+mesh = SubResource("CapsuleMesh_ojlwn")
+skeleton = NodePath("../..")

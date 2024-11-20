@@ -1,0 +1,261 @@
+[gd_scene load_steps=19 format=3 uid="uid://ud5m07ikm810"]
+
+[ext_resource type="Script" path="res://Weapon.gd" id="2_ils11"]
+[ext_resource type="Script" path="res://Player.gd" id="2_s8pv5"]
+[ext_resource type="ArrayMesh" uid="uid://bl1cxnk15k2o6" path="res://assets/crowbar/w_crowbar.obj" id="3_gyjyc"]
+[ext_resource type="Texture2D" uid="uid://cmbc2uqwcgxfb" path="res://assets/crowbar/head.png" id="4_pc50s"]
+[ext_resource type="Texture2D" uid="uid://b6pvibc3twme7" path="res://assets/crowbar/head_normal_a.png" id="5_2hood"]
+[ext_resource type="Texture2D" uid="uid://dqbtffj8lmum8" path="res://assets/crowbar/head_normal.png" id="5_4t3gk"]
+[ext_resource type="Texture2D" uid="uid://cqtu40vl8br3q" path="res://assets/crowbar/crowbar_cyl.png" id="7_2mq1o"]
+[ext_resource type="Texture2D" uid="uid://b6fkd0kpds7hl" path="res://assets/crowbar/crowbar_normal.png" id="8_jik46"]
+[ext_resource type="Script" path="res://barHealth.gd" id="14_wwk61"]
+[ext_resource type="Script" path="res://barSpeed.gd" id="15_1tgbi"]
+[ext_resource type="PackedScene" uid="uid://ibitlm57sxg" path="res://assets/dm_morph/dm_morph.tscn" id="16_vatax"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88udy"]
+albedo_texture = ExtResource("4_pc50s")
+normal_enabled = true
+normal_texture = ExtResource("5_4t3gk")
+heightmap_scale = -2.636
+heightmap_texture = ExtResource("5_2hood")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43384"]
+albedo_texture = ExtResource("7_2mq1o")
+metallic = 0.5
+normal_enabled = true
+normal_scale = -1.0
+normal_texture = ExtResource("8_jik46")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bech3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ojlwn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rjmxs"]
+sky_top_color = Color(1.75677e-06, 0.124027, 0.388125, 1)
+sky_horizon_color = Color(0.0684928, 0.105631, 0.245073, 1)
+sky_curve = 0.252268
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.0982288, 0.129232, 0.297249, 1)
+ground_curve = 3.04437
+ground_energy_multiplier = 0.7
+sun_angle_max = 2.3
+sun_curve = 6.33367
+
+[sub_resource type="Sky" id="Sky_kiljo"]
+sky_material = SubResource("ProceduralSkyMaterial_rjmxs")
+
+[sub_resource type="Environment" id="Environment_6t3nn"]
+background_mode = 2
+background_color = Color(0.290196, 0.52549, 1, 1)
+sky = SubResource("Sky_kiljo")
+tonemap_white = 8.7
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.58
+glow_strength = 1.1
+glow_blend_mode = 1
+glow_hdr_threshold = 1.15
+glow_hdr_scale = 0.0
+glow_map_strength = 1.0
+fog_enabled = true
+fog_light_color = Color(0.196588, 0.322059, 0.557582, 1)
+fog_density = 0.0175
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.235
+volumetric_fog_density = 0.026
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_sky_affect = 0.295
+
+[node name="Main" type="Node3D"]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45535, 6.21128, 41.5811)
+script = ExtResource("2_s8pv5")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="weaponBase" type="Node3D" parent="Player/Camera3D"]
+transform = Transform3D(-8.92167, 0, -1.18486, 0, 9, 0, 1.18486, 0, -8.92167, 0.34827, -0.394465, -0.964056)
+script = ExtResource("2_ils11")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Camera3D/weaponBase"]
+transform = Transform3D(0.00550553, 7.15158e-05, 0.00238414, 0.000310951, 0.0059246, -0.000895775, -0.00236485, 0.000945512, 0.00543264, -0.0187068, -0.0542414, -0.0364742)
+cast_shadow = 0
+mesh = ExtResource("3_gyjyc")
+surface_material_override/0 = SubResource("StandardMaterial3D_88udy")
+surface_material_override/1 = SubResource("StandardMaterial3D_43384")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_bech3")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Player"]
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_ojlwn")
+
+[node name="barHealth" type="ProgressBar" parent="Player"]
+offset_left = 29.0
+offset_top = 603.0
+offset_right = 279.0
+offset_bottom = 630.0
+script = ExtResource("14_wwk61")
+
+[node name="barSpeed" type="ProgressBar" parent="Player"]
+offset_left = 886.0
+offset_top = 603.0
+offset_right = 1136.0
+offset_bottom = 630.0
+script = ExtResource("15_1tgbi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6t3nn")
+
+[node name="MoonLight" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.218973, 0.926203, -0.306917, 0.452329, 0.375068, 0.809149, 0.864551, 0.038355, -0.501079, 0, 0, 0)
+light_color = Color(0.69719, 0.771499, 1, 1)
+light_energy = 4.0
+shadow_enabled = true
+shadow_bias = 0.6
+shadow_blur = 0.796
+
+[node name="GarageDoorLight1" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.82601, 0.563656, 0, -0.563656, 0.82601, -0.636603, -4.69851, 47.2373)
+light_color = Color(0.768627, 1, 1, 1)
+light_energy = 21.415
+spot_range = 11.2522
+spot_angle = 88.7352
+
+[node name="GarageDoorLight2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-4.37114e-08, 0.563656, -0.82601, 0, 0.82601, 0.563656, 1, 2.46382e-08, -3.6106e-08, -22.6743, 0.441437, -34.725)
+light_color = Color(0.768627, 1, 1, 1)
+light_energy = 21.415
+spot_range = 11.2522
+spot_angle = 88.7352
+
+[node name="GarageDoorLight3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-1, -4.92764e-08, 7.22121e-08, 0, 0.82601, 0.563656, -8.74228e-08, 0.563656, -0.82601, 68.647, -2.33055, 3.01248)
+light_color = Color(0.768627, 1, 1, 1)
+light_energy = 21.415
+spot_range = 11.2522
+spot_angle = 88.7352
+
+[node name="GarageTopLight1" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-1, -4.92763e-08, 7.22121e-08, 8.33089e-08, -0.787538, 0.616266, 2.65024e-08, 0.616266, 0.787538, 58.2891, 2.90991, 9.48623)
+light_color = Color(0.768627, 1, 0.819608, 1)
+light_energy = 21.415
+spot_range = 23.8957
+spot_angle = 89.99
+
+[node name="GarageTopLight2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(7.02138e-08, 0.616266, 0.787538, 8.33089e-08, -0.787538, 0.616266, 1, 2.23385e-08, -1.06636e-07, -12.0276, 5.66693, -24.5034)
+light_color = Color(0.768627, 1, 0.819608, 1)
+light_energy = 21.415
+spot_range = 23.8957
+spot_angle = 89.99
+
+[node name="GarageTopLight3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.965926, -0.159501, -0.20383, 6.22354e-08, -0.787538, 0.616266, -0.258819, -0.595268, -0.760703, 10.6827, -0.178463, 37.7741)
+light_color = Color(0.768627, 1, 0.819608, 1)
+light_energy = 21.415
+spot_range = 23.8957
+spot_angle = 89.99
+
+[node name="GarageBottomALight1" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -34.2896, -4.47705, -30.1685)
+light_color = Color(0.87451, 1, 1, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomBLight1" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -32.2502, -4.52969, -11.3046)
+light_color = Color(0.956863, 1, 0.862745, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomCLight1" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -18.6121, -4.52969, -14.2468)
+light_color = Color(0.956863, 1, 0.862745, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomALight2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 4.17739, -9.42214, 58.56)
+light_color = Color(0.87451, 1, 1, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomBLight2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 23.0413, -9.47478, 56.5206)
+light_color = Color(0.956863, 1, 0.862745, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomCLight2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 20.099, -9.47478, 42.8825)
+light_color = Color(0.956863, 1, 0.862745, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomALight3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-5.96046e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 5.96046e-08, 2.6054e-15, 64.187, -7.03207, -8.56393)
+light_color = Color(0.87451, 1, 1, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomBLight3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-5.96046e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 5.96046e-08, 2.6054e-15, 45.3231, -7.0847, -6.52449)
+light_color = Color(0.956863, 1, 0.862745, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="GarageBottomCLight3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-5.96046e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 5.96046e-08, 2.6054e-15, 48.2653, -7.0847, 7.11362)
+light_color = Color(0.956863, 1, 0.862745, 1)
+light_energy = 14.535
+light_size = 1.0
+spot_range = 15.7033
+spot_angle = 85.7813
+
+[node name="BottomLight1" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.965926, -1.48551e-08, 0.258819, 0.258817, -0.00385706, 0.965919, 0.000998266, 0.999993, 0.00372564, 16.1684, -30.7302, -1.43454)
+light_color = Color(0.894118, 1, 0.941176, 1)
+light_energy = 143.595
+light_specular = 0.24
+spot_range = 26.0728
+spot_angle = 44.2305
+
+[node name="BottomLight3" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.965926, -1.48551e-08, 0.258819, 0.258817, -0.00385706, 0.965919, 0.000998266, 0.999993, 0.00372564, 25.2804, -30.7302, 10.1485)
+light_color = Color(0.894118, 1, 0.941176, 1)
+light_energy = 143.595
+light_specular = 0.24
+spot_range = 26.0728
+spot_angle = 44.2305
+
+[node name="BottomLight2" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.517422, 0.793528, -0.320293, 0.198582, 0.252729, 0.946939, 0.83237, -0.553571, -0.0268128, -19.0022, -25.0999, 11.7221)
+light_color = Color(0.894118, 1, 0.941176, 1)
+light_energy = 143.595
+light_specular = 0.24
+spot_range = 26.0728
+spot_angle = 44.2305
+
+[node name="Map" parent="." instance=ExtResource("16_vatax")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1.38184, -4.21374, -0.939324)

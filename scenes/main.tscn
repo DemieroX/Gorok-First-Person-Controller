@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2745jvh6s8wc"]
+
+[sub_resource type="Environment" id="Environment_6t3nn"]
+background_mode = 1
+background_color = Color(0.290196, 0.52549, 1, 1)
+background_energy_multiplier = 0.52
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bech3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ojlwn"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource("Environment_6t3nn")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+transform = Transform3D(0.997291, 0, 0, 0, 0.997291, 0, 0, 0, 0.997291, 0, 0, 0)
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(-0.727647, 0.0482605, -0.684253, -0.685914, -0.0407042, 0.726543, 0.00721138, 0.998005, 0.0627209, -7.0862, 22.9846, -6.80986)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_bech3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_ojlwn")
+skeleton = NodePath("../..")
