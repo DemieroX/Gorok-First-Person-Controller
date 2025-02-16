@@ -1,4 +1,9 @@
 # Gorok - Retro-Style First-Person Controller
+Old-School-FPS Controller Example in Godot
+
+![image](https://github.com/user-attachments/assets/c07dc6ce-16c2-492a-88b3-dca29b0379c7)
+
+
 This is a first person controller setup in the style of Turok, Quake and other retro shooters.
 Its is one of the first coded projects I have done and as a result the code can be bit of a mess,
 however it works well enough with little issues. At the time of its creation, I did not release this
